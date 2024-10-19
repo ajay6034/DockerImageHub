@@ -51,13 +51,18 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    # Debug step to check the tag value
+    - name: Debug Docker Tag
+      run: echo "Tag value: ${{ secrets.DOCKER_USERNAME }}/flasktest-app:latest"
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
         context: .
         file: ./DockerFile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/flasktest-app:latest
+        # Use a hardcoded tag to avoid dynamic issues
+        tags: flasktest-app:latest
 
     - name: Image digest
       run: echo ${{ steps.build-and-publish.outputs.digest }}
