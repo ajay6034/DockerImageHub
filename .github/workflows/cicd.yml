@@ -35,7 +35,7 @@ jobs:
       run: |
         pytest
 
-  build-and-publish:
+    build-and-publish:
     needs: build-and-test
     runs-on: ubuntu-latest
 
@@ -62,3 +62,4 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.build-and-publish.outputs.digest }}
+
